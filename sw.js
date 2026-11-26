@@ -1,5 +1,6 @@
-const CACHE_NAME = 'barra-alsalfa-v3';
-const PAGE_PATH = './barra%20alsalfa.html';
+const CACHE_NAME = 'barra-alsalfa-v5';
+const PAGE_PATH = './barra%20al-salfa.html';
+const ICON_PATH = './Noir%20Spy%20Silhouette%20Emblem.png';
 const CORE_ASSETS = [
   './',
   PAGE_PATH,
@@ -10,12 +11,10 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
       await cache.addAll(CORE_ASSETS);
-      for (const icon of ['./icon-192.png', './icon-512.png']) {
-        try {
-          const res = await fetch(icon);
-          if (res.ok) await cache.put(icon, res);
-        } catch (e) {}
-      }
+      try {
+        const res = await fetch(ICON_PATH);
+        if (res.ok) await cache.put(ICON_PATH, res);
+      } catch (e) {}
     })
   );
   self.skipWaiting();
